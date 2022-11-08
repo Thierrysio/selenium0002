@@ -1,6 +1,8 @@
 ﻿using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium;
 
+
+
 namespace selenium0002;
 
 public partial class MainPage : ContentPage
@@ -30,15 +32,23 @@ public partial class MainPage : ContentPage
         // verifier le diver dans c:\Drivers\web
         IWebDriver driver = new ChromeDriver(@"c:\Drivers\web");
        
-        driver.Navigate().GoToUrl("https://www.google.fr/");
-        var element = driver.FindElement(By.XPath("//*[@id=\"L2AGLb\"]"));
+        driver.Navigate().GoToUrl("https://www.ldlc.com");
         Thread.Sleep(5000);
-        element.Click();
-        element = driver.FindElement(By.XPath("/html/body/div[1]/div[3]/form/div[1]/div[1]/div[1]/div/div[2]/input"));
-        element.SendKeys("webshop");
-        Thread.Sleep(5000);
-        element.Submit();
-        Thread.Sleep(5000);
+		//click droit -> copy -> full xpath
+        var element = driver.FindElement(By.XPath("/html/body/div[1]/div/div[2]/div[3]/button"));
+		element.Click();
+         element = driver.FindElement(By.XPath("/html/body/header/div[2]/div/div/form/div/div[2]/div[1]/input"));
+        element.SendKeys("asus");
+		 element.Submit();
+		Thread.Sleep(5000);
+		var elements = driver.FindElements(By.TagName("h3"));
+        int nb = elements.Count;
+        foreach (var monTitle in elements)
+        {
+            string resultat = monTitle.Text;
+        }
+		driver.Quit();
+
     }
 }
 
